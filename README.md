@@ -29,7 +29,8 @@ Before you begin, ensure you have met the following requirements:
 
 2. Navigate to the root folder and execute:
     ```
-    npm init playwright@latest
+    npm ci
+    npx playwright install --with-deps
     ```
     Then follow the default steps
 
@@ -39,60 +40,39 @@ Before you begin, ensure you have met the following requirements:
 
 To execute the tests, pass the following environment variables:
 
-- `$env:ENV`: Set to `"Prod"`, `"Dev"`, or `"Stage"` to execute the tests against the desired environment.
-- `$env:API_TOKEN`: Pass your API token as a string.
+- `NODE_ENV`: Set to `production` or `stage` to execute the tests against the desired environment. Currently it     will work only against production env as the application test env details are not available. 
+- `USERNAME`: Set to username email
+- `PASSWORD`: Set password
 
 ```
-#Execute all the test locally
-$env:ENV=${env}; $env:API_TOKEN="your_api_token"; npx playwright test
-
-#Execute all the test locally in GUI mode
-$env:ENV=${env}; $env:API_TOKEN="your_api_token"; npx playwright test --ui
-
-
 #Execute all the test locally in GUI mode against chromium browser
-$env:ENV=${env}; $env:API_TOKEN="your_api_token"; npx playwright test --ui --project=chromium
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwright test --ui --project=chromium
 
 #Execute all the test locally against chromium browser in headed mode
-$env:ENV=${env}; $env:API_TOKEN="your_api_token"; npx playwright test --project=chromium --headed
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwright test --project=chromium --headed
 
 #Execute all the test locally in GUI mode against chromium browser in headed mode with tags
-$env:ENV=${env}; $env:API_TOKEN="your_api_token"; npx playwright test --ui --project=chromium --grep "@regression"
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwright test --ui --project=chromium --grep "@regression"
 
 ```
 ### Running Tests in Docker
 
 ```
-$env:ENV=${env}; $env:API_TOKEN="your_api_token"; docker-compose up --build 
-```
-
-## Writing Tests
-```
-// tests/example.test.js
-const { test, expect } = require('@playwright/test');
-
-test('basic test', async ({ page }) => {
-  await page.goto('/');
-  const title = await page.title();
-  expect(title).toBe('Your Page Title');
-});
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" docker-compose up --build 
 ```
 ## Directory Structure
 ```
-ECO-UI-API-Automation/
+KB-E2E-Automation/
 ├── config                  # base URL and userdata for a specific environment
 ├── page-objects            # methods and locator for the specif pages
-├── test-data               # request json file for API tests
-├── tests/UI                # Test files for UI
-│   └── salesE2E.spec.ts
-├── tests/API               # Test files for API 
-│   └── api_tests.spec.ts
+├── tests\UI                # Test files for UI
+│   └── createBoard.spec.ts
 ├── Dockerfile              # Docker configuration
+├── docker-compose.yml      # Docker compose config
 ├── playwright.config.js    # Playwright configuration
 ├── package.json            # Project metadata and dependencies
 └── README.md               # Project documentation
-└── TestPlan.md             # Test plan for the payment gateway integration
-└── TestPriority.md         # Test priorty documentation
+
 ```
 
 
