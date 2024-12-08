@@ -24,7 +24,7 @@ Before you begin, ensure you have met the following requirements:
 ### Cloning the Repository
 1. Clone this repository to your local machine:
     ```
-    https://github.com/rohithravi08/eco-ui-api-automation.git
+    https://github.com/rohithravi08/KB-E2E-TESTS.git
     ```
 
 2. Navigate to the root folder and execute:
