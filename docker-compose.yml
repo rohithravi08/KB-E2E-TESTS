@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  playwright-test:
+    image: playwright-test
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npx playwright test --project=chromium
+    volumes:
+      - ./playwright-report/:/app/playwright-report
+      - ./test-results/:/app/test-results
