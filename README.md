@@ -6,7 +6,6 @@ UI tests to verify trello board feature
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Running Tests](#running-tests)
-- [Writing Tests](#writing-tests)
 - [Directory Structure](#directory-structure)
 
 ## Introduction
@@ -46,13 +45,13 @@ To execute the tests, pass the following environment variables:
 
 ```
 #Execute all the test locally in GUI mode against chromium browser
-npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwright test --ui --project=chromium
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" playwright test --ui --project=chromium
 
 #Execute all the test locally against chromium browser in headed mode
-npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwright test --project=chromium --headed
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" playwright test --project=chromium --headed
 
 #Execute all the test locally in GUI mode against chromium browser in headed mode with tags
-npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwright test --ui --project=chromium --grep "@regression"
+npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" playwright test --ui --project=chromium --grep "@regression"
 
 ```
 ### Running Tests in Docker
@@ -60,6 +59,19 @@ npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" npx playwrig
 ```
 npx cross-env NODE_ENV="production" USERNAME="xxxx" PASSWORD="xxxx" docker-compose up --build 
 ```
+## Test Reporting
+
+After each test run, an HTML report is generated to provide detailed insights into the execution results. The HTML report includes the following key information:
+
+- **Test Results**: Displays the status of each test (Pass/Fail) along with the duration.
+- **Error Details**: If a test fails, the report includes detailed logs, screenshots, and videos for easy debugging.
+- **Traceability**: Links to specific test cases and steps, making it easier to identify issues.
+- **Browser Logs**: Includes network requests, console logs, and browser events captured during test execution.
+
+### How to View the Report
+
+After running the tests, you can find the HTML report in the `playwright-report` directory (or another location as configured). Simply open the `index.html` file in your browser to view the detailed test results.
+
 ## Directory Structure
 ```
 KB-E2E-Automation/
